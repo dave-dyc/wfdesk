@@ -9,6 +9,33 @@ handlers:
   static_files: favicon.ico
   upload: favicon\.ico
   
-- url: /.*
-  script: main.php
+- url: /index.php
+  script: index.php
   secure: always
+  
+- url: /data.php
+  script: data.php
+  secure: always
+  
+- url: /login.php
+  script: login.php
+  secure: always
+  
+- url: /users.php
+  script: users.php
+  secure: always
+  
+- url: /logout.php
+  script: logout.php
+  secure: always
+
+- url: /unauthorized.php
+  script: unauthorized.php
+  secure: always
+  
+- url: /*
+  script: index.php
+  secure: always
+  
+  
+

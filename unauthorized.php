@@ -1,10 +1,4 @@
-<?php
-
-use google\appengine\api\users\UserService;
-
-$url = UserService::createLogoutUrl('/');
-
-?><!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -25,9 +19,9 @@ $url = UserService::createLogoutUrl('/');
         <span class="mif-lock mif-4x place-right" style="margin-top: -10px;"></span>
         <h2 class="text-light">Sorry...</h2>
         <hr class="thin mt-4 mb-4 bg-white">
-        You must use your @wordfence.com email to access WFDesk.
+        Your email <b><?php echo htmlentities($_SESSION['email']); ?></b> is not authorized to access WFDesk. Please contact an administrator.
         <div class="form-group">
-            <a style="text-decoration:none" href="<?php echo $url; ?>"><button style="margin-top:25px" class="button alert outline rounded">
+            <a style="text-decoration:none" href="logout.php"><button style="margin-top:25px" class="button alert outline rounded">
                 <span class="mif-exit icon"></span>
                 <span class="caption">Logout</span>
             </button></a>
