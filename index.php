@@ -173,7 +173,7 @@ $(document).ready(function() {
     <?php
         //currently logged in user has a worker account
         if (isset($users[$email]))
-            echo "switch_user('" . htmlentities($users[$email][0]) . "');\n";
+            echo "switch_user(" . json_encode($users[$email][0]) . ");\n";
         else {
             echo "$('.filter_assigned,.filter_pending').hide();\n";
             echo "$('.filter_unassigned').trigger('click');";

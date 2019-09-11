@@ -4,6 +4,9 @@ include 'settings.php';
 
 session_start();
 
+if (empty($_SESSION['csrf']))
+    $_SESSION['csrf'] = bin2hex(openssl_random_pseudo_bytes(32));
+
 $roles = ['Worker', 'Admin'];
 $users = [
     'wftest@wordfence.com' => ['wftest', 'Admin']
@@ -76,7 +79,7 @@ $handlers = [
     }
 ];
 
-if (isset($handlers[$_POST['action']]))
+if (isset($handlers[$_POST['action']]) && $_POST['csrf'] === $_SESSION['csrf'])
     $handlers[$_POST['action']]();
 
 ?><!DOCTYPE html>
@@ -137,6 +140,7 @@ if (isset($handlers[$_POST['action']]))
     <tr>
         <form method="post" action="">
             <input type="hidden" name="action" value="create_user">
+            <input type="hidden" name="csrf" id="csrf" value="<?php echo htmlentities($_SESSION['csrf']); ?>">
             <td><input name="email" type="email" required maxlength="128"></td>
             <td><input name="alias" type="text" required maxlength="128"></td>
             <td><select name="role"><?php
@@ -155,8 +159,10 @@ if (isset($handlers[$_POST['action']]))
 
 <script>
 
+var csrf = document.getElementById('csrf').value;
+
 function post(fields) {
-    var form = document.createElement("form");
+    var form = document.createElement('form');
     document.body.appendChild(form);
     form.method = "post";
     form.action = "";
@@ -164,7 +170,7 @@ function post(fields) {
     var len = fields.length;
     for (var i = 0; i < len; i++) {
         var field = fields[i];
-        var f = document.createElement("input");
+        var f = document.createElement('input');
         f.name = field[0];
         f.type = 'hidden'
         f.value = field[1];
@@ -181,7 +187,8 @@ $('.change_role').change(function() {
     post([
         ['action', 'change_role'],
         ['email' , email],
-        ['role'  , role]
+        ['role'  , role],
+        ['csrf'  , csrf]
     ]);
 });
 
@@ -193,7 +200,8 @@ $('.remove_user').click(function() {
     
     post([
         ['action', 'remove_user'],
-        ['email' , email]
+        ['email' , email],
+        ['csrf'  , csrf]
     ]);
 });
 

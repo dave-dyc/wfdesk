@@ -68,7 +68,7 @@ else
 
 $posts = [];
 
-for ($page = 1; $page <= 5; $page++) {
+for ($page = 1; $page <= 10; $page++) {
     $contents = file_get_contents('https://wordpress.org/support/plugin/wordfence/page/' . $page);
     $root = get($contents, '<ul id="bbp-topic-', '</ul>');
 
@@ -139,7 +139,7 @@ for ($page = 1; $page <= 5; $page++) {
         
         $posts[] = [
             0,
-            '<a target="_blank" href="' . $url . '">' . $title . '</a>',
+            '<a target="_blank" href="' . urlencode($url) . '">' . htmlentities($title) . '</a>',
             $author,
             $replies,
             $last_user,
