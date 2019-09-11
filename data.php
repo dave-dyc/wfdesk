@@ -116,7 +116,7 @@ for ($page = 1; $page <= 10; $page++) {
             $dirty = true;
             
             foreach ($prev['data'] as $prev_thread) {
-                if ($prev_thread[1] == '<a target="_blank" href="' . $url . '">' . $title . '</a>' && $prev_thread[3] == $replies) {
+                if ($prev_thread[1] == '<a target="_blank" href="' . htmlspecialchars($url) . '">' . strip_tags($title) . '</a>' && $prev_thread[3] == $replies) {
                     $assigned = $prev_thread[6];
                     $status   = $prev_thread[7];
                     
@@ -139,7 +139,7 @@ for ($page = 1; $page <= 10; $page++) {
         
         $posts[] = [
             0,
-            '<a target="_blank" href="' . urlencode($url) . '">' . htmlentities($title) . '</a>',
+            '<a target="_blank" href="' . htmlspecialchars($url) . '">' . strip_tags($title) . '</a>',
             $author,
             $replies,
             $last_user,
