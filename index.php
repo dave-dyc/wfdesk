@@ -32,7 +32,7 @@ if (empty($users[$email])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     
-    <link rel="stylesheet" href="https://cdn.metroui.org.ua/v4/css/metro-all.min.css">
+    <link rel="stylesheet" href="/static/metro-all.min.css">
     <title>WFDesk - Dashboard</title>
 
     <style>
@@ -46,7 +46,7 @@ if (empty($users[$email])) {
     </style>
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="https://cdn.metroui.org.ua/v4/js/metro.min.js"></script>
+    <script src="/static/metro.min.js"></script>
 </head>
 <body>
 <div class="container">
