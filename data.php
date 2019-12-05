@@ -87,7 +87,7 @@ for ($page = 1; $page <= 10; $page++) {
         if ($closed)
             continue; //ignore any closed threads
         
-        $author  = get($thread, 'class="bbp-author-name">', '</a></span>')[0];
+        $author  = get($thread, 'class="bbp-author-name">', '</span></a>')[0];
         $voices  = get($thread, '<li class="bbp-topic-voice-count">', '</li>')[0];
         $replies = get($thread, '<li class="bbp-topic-reply-count">', '</li>')[0];
         
@@ -95,7 +95,7 @@ for ($page = 1; $page <= 10; $page++) {
         $last_active = get($last_active, '">', '</a>')[0];
         
         $last_user = get($thread, '<span class="bbp-topic-freshness-author">', '</a></span>')[0];
-        $last_user = get($last_user, 'class="bbp-author-name">', '</a></span>');
+        $last_user = get($last_user, 'class="bbp-author-name">', '</span>');
         if (empty($last_user))
             $last_user = $author;
         else
